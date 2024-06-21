@@ -33,9 +33,15 @@ export default function ManageSlots() {
     data: slots = [],
     error: slotsError,
     isLoading: slotsLoading,
-  } = useSWR(token ? "http://127.0.0.1:8000/api/slots/" : null, fetcher, {
-    revalidateOnMount: true,
-  });
+  } = useSWR(
+    token
+      ? "https://restaurant-booking-sable-585091cb1330.herokuapp.com/api/slots/"
+      : null,
+    fetcher,
+    {
+      revalidateOnMount: true,
+    }
+  );
 
   if (isLoading || slotsLoading) {
     return (

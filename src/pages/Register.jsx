@@ -33,7 +33,10 @@ export default function Register() {
     e.preventDefault();
     setIsSubmitting(true);
     axios
-      .post(`http://127.0.0.1:8000/api/users/`, formData)
+      .post(
+        `https://restaurant-booking-sable-585091cb1330.herokuapp.com/api/users/`,
+        formData
+      )
       .then((response) => {
         const { is_admin, user, token } = response.data;
         const userObj = { is_admin, token, ...user };

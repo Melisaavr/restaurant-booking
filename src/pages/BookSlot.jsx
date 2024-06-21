@@ -49,17 +49,29 @@ export default function BookSlot() {
     data: slots = [],
     error: slotsError,
     isLoading: slotsLoading,
-  } = useSWR(token ? "http://127.0.0.1:8000/api/slots/" : null, fetcher, {
-    revalidateOnMount: true,
-  });
+  } = useSWR(
+    token
+      ? "https://restaurant-booking-sable-585091cb1330.herokuapp.com/api/slots/"
+      : null,
+    fetcher,
+    {
+      revalidateOnMount: true,
+    }
+  );
 
   const {
     data: bookings = [],
     error: bookingsError,
     isLoading: bookingsLoading,
-  } = useSWR(token ? "http://127.0.0.1:8000/api/bookings/" : null, fetcher, {
-    revalidateOnMount: true,
-  });
+  } = useSWR(
+    token
+      ? "https://restaurant-booking-sable-585091cb1330.herokuapp.com/api/bookings/"
+      : null,
+    fetcher,
+    {
+      revalidateOnMount: true,
+    }
+  );
 
   if (isLoading || slotsLoading || bookingsLoading) {
     return (
@@ -102,7 +114,7 @@ export default function BookSlot() {
     setIsBooking(true);
     axios
       .post(
-        `http://127.0.0.1:8000/api/bookings/`,
+        `https://restaurant-booking-sable-585091cb1330.herokuapp.com/api/bookings/`,
         { user: id, slot: slot.id },
         {
           headers: { Authorization: `Token ${token}` },
@@ -110,8 +122,12 @@ export default function BookSlot() {
       )
       .then(() => {
         notify();
-        mutate("http://127.0.0.1:8000/api/bookings/");
-        mutate("http://127.0.0.1:8000/api/slots/");
+        mutate(
+          "https://restaurant-booking-sable-585091cb1330.herokuapp.com/api/bookings/"
+        );
+        mutate(
+          "https://restaurant-booking-sable-585091cb1330.herokuapp.com/api/slots/"
+        );
       })
       .catch((error) => {
         console.error(error);
