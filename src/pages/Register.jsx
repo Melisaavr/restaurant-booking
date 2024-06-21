@@ -47,7 +47,6 @@ export default function Register() {
         localStorage.setItem("user", JSON.stringify(userObj));
       })
       .catch((error) => {
-        console.log(error);
         if (error.response.data.email) {
           setError(toSentenceCase(error.response.data.email.at(0)));
         } else if (error.response.data.password) {

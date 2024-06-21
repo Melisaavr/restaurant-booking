@@ -6,7 +6,7 @@ import Error from "../components/Error";
 import Loader from "../components/Loader";
 import useSWR from "swr";
 import moment from "moment";
-import { convertTimeFormat, getFullDayName } from "../utils";
+import { getFullDayName } from "../utils";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -147,8 +147,7 @@ export default function ManageSlots() {
                             )}
                           >
                             <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                              {convertTimeFormat(slot.start_time)} to{" "}
-                              {convertTimeFormat(slot.end_time)}
+                              {slot.start_time} to {slot.end_time}
                             </td>
                             <td className="whitespace-nowrap px-3 py-4 pl-10 text-sm text-gray-600 font-medium bg-indigo-100">
                               5
