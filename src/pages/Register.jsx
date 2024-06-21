@@ -8,6 +8,7 @@ import Container from "../components/Container";
 import Loader from "../components/Loader";
 
 import useAuthStore from "../hooks/useAuthStore";
+import { toSentenceCase } from "../utils";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -46,8 +47,16 @@ export default function Register() {
         localStorage.setItem("user", JSON.stringify(userObj));
       })
       .catch((error) => {
-        console.error(error);
-        setError(error.message);
+        console.log(error);
+        if (error.response.data.email) {
+          setError(toSentenceCase(error.response.data.email.at(0)));
+        } else if (error.response.data.password) {
+          setError(toSentenceCase(error.response.data.password.at(0)));
+        } else if (error.response.data.first_name) {
+          setError(toSentenceCase(error.response.data.first_name.at(0)));
+        } else {
+          setError(toSentenceCase(error.message));
+        }
       })
       .finally(() => {
         setIsSubmitting(false);
@@ -110,7 +119,7 @@ export default function Register() {
               value={formData.password}
               onChange={handleChange}
               required
-              minLength={6}
+              minLength={8}
               maxLength={16}
             />
           </Field>

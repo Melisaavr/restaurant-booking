@@ -17,3 +17,16 @@ export function getFullDayName(shortDay) {
 export function convertTimeFormat(timeString) {
   return moment(timeString, "HH:mm:ss").format("h:mm A");
 }
+
+export function toSentenceCase(sentence) {
+  sentence = sentence.trim();
+
+  if (sentence.length === 0) {
+    return sentence;
+  }
+
+  let capitalizedSentence =
+    sentence.charAt(0).toUpperCase() + sentence.slice(1);
+
+  return capitalizedSentence;
+}

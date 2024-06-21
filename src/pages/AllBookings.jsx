@@ -81,15 +81,21 @@ export default function AllBookings() {
 
   if (slotsError || bookingsError || usersError) {
     return (
-      <Error
-        message={`${slotsError?.message || ""} ${
-          bookingsError?.message || ""
-        } ${usersError?.message || ""}`}
-      />
+      <div className="flex justify-center  mt-16">
+        <Error
+          message={`${slotsError?.message || ""} ${
+            bookingsError?.message || ""
+          } ${usersError?.message || ""}`}
+        />
+      </div>
     );
   }
 
   const notify = () => toast.success("Cancellation successful!");
+  const notifyError = () =>
+    toast.error(
+      "An error occured while cancelling your slot. Please try again."
+    );
 
   function handleCancelling(booking) {
     setIsCancelling(true);
@@ -110,6 +116,7 @@ export default function AllBookings() {
         );
       })
       .catch((error) => {
+        notifyError();
         console.error(error);
       })
       .finally(() => {

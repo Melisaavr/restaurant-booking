@@ -67,13 +67,21 @@ export default function Bookings() {
 
   if (slotsError || bookingsError) {
     return (
-      <Error
-        message={`${slotsError?.message || ""} ${bookingsError?.message || ""}`}
-      />
+      <div className="flex justify-center  mt-16">
+        <Error
+          message={`${slotsError?.message || ""} ${
+            bookingsError?.message || ""
+          }`}
+        />
+      </div>
     );
   }
 
   const notify = () => toast.success("Cancellation successful!");
+  const notifyError = () =>
+    toast.error(
+      "An error occured while cancelling your slot. Please try again."
+    );
 
   function handleCancelling(booking) {
     setIsCancelling(true);
@@ -94,6 +102,7 @@ export default function Bookings() {
         );
       })
       .catch((error) => {
+        notifyError();
         console.error(error);
       })
       .finally(() => {

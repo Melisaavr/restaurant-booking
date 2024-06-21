@@ -8,6 +8,7 @@ import Container from "../components/Container";
 import Loader from "../components/Loader";
 
 import useAuthStore from "../hooks/useAuthStore";
+import { toSentenceCase } from "../utils";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -45,8 +46,11 @@ export default function Login() {
         localStorage.setItem("user", JSON.stringify(userObj));
       })
       .catch((error) => {
-        console.error(error);
-        setError(error.message);
+        if (error.response) {
+          setError(toSentenceCase(error.response.data.error));
+        } else {
+          setError(toSentenceCase(error.message));
+        }
       })
       .finally(() => {
         setIsSubmitting(false);
@@ -97,7 +101,7 @@ export default function Login() {
               value={formData.password}
               onChange={handleChange}
               required
-              minLength={6}
+              minLength={8}
               maxLength={16}
             />
           </Field>

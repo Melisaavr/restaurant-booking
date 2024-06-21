@@ -2,7 +2,7 @@ import { ExclamationTriangleIcon } from "@heroicons/react/24/solid";
 
 export default function Error({ message }) {
   return (
-    <div className="rounded-md bg-red-50 p-4">
+    <div className="rounded-md bg-red-50 p-4 w-full max-w-xl">
       <div className="flex">
         <div className="flex-shrink-0">
           <ExclamationTriangleIcon

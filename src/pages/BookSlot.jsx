@@ -83,13 +83,19 @@ export default function BookSlot() {
 
   if (slotsError || bookingsError) {
     return (
-      <Error
-        message={`${slotsError?.message || ""} ${bookingsError?.message || ""}`}
-      />
+      <div className="flex justify-center  mt-16">
+        <Error
+          message={`${slotsError?.message || ""} ${
+            bookingsError?.message || ""
+          }`}
+        />
+      </div>
     );
   }
 
   const notify = () => toast.success("Booking successful!");
+  const notifyError = () =>
+    toast.error("An error occured while booking your slot. Please try again.");
 
   const slotsByDay = slots.filter((s) => s.day === day);
 
@@ -130,6 +136,7 @@ export default function BookSlot() {
         );
       })
       .catch((error) => {
+        notifyError();
         console.error(error);
       })
       .finally(() => {
